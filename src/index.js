@@ -8,6 +8,7 @@ const fastify = require('fastify')
     logger: true
 });
 
+
 //Initialising our routes
 routes.forEach((route, index) => {
     fastify.route(route);

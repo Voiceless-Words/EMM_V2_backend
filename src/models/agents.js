@@ -13,11 +13,11 @@ const agentSchema = new mongoose.Schema({
     PhoneNumber: {type: Number, required: true},
     Active: {type: Boolean, default: false},
     DeactivationMessage: {type: String, default: null},
-    Updated: {type: Date, default: Date.now},
+    Updated: {type: Date, default: null},
     Created: {type: Date, default: Date.now}
-});
+}, {collection: "agents"});
 
-agentSchema.pre('save', (next) => {
+/*agentSchema.pre('save', (next) => {
     let agent = this;
 
     if (!agent.isModified('Password')) return next();
@@ -39,6 +39,6 @@ agentSchema.methods.comparePassword = (agentPassword, callBack) => {
         if (err) return callBack(err);
         callBack(null, isMatch);
     });
-};
+};*/
 
 module.exports = mongoose.model('Agent', agentSchema);

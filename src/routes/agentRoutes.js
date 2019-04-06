@@ -34,7 +34,7 @@ const routes = [
     },
     {
         method: 'DELETE',
-        url: '/users/delete',
+        url: '/users/delete/:id',
         handler: agentsController.deleteAgent
     }
 ]
