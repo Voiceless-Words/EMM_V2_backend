@@ -18,6 +18,11 @@ const routes = [
         handler: agentsController.addAgent
     },
     {
+        method: 'POST',
+        url: '/forgot',
+        handler: agentsController.forgotPassword
+    },
+    {
         method: 'PUT',
         url: '/users/update/:id',
         handler: agentsController.updateAgent

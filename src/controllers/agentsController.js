@@ -3,6 +3,7 @@ const boom = require('boom');
 
 //Get data model for agents
 const Agent = require('../models/agents');
+const nodeMailer = require('nodemailer');
 
 //Get all the users from the Agents collection
 exports.getAgents = async (req, res) => {
@@ -53,6 +54,49 @@ exports.addAgent = async (req, res) => {
         .catch(err => {
             res.status(400).send({"User":"Unable to add the user to the database"});
         });
+    } catch (err) {
+        throw boom.boomify(err);
+    }
+}
+
+//forgot password check email exists
+exports.forgotPassword = async (req, res) => {
+    try {
+
+        await Agent.find({Email:req.body.Email}, (err, doc) => {
+            if (err)
+            {
+                console.log(err);
+                res.send({"User":"Internal server error can not update the user"});
+            } else if (doc.length === 0) {
+                res.status(400).send({"User":"The email you entered does not exist"});
+            } else {
+                let transporter = nodeMailer.createTransport({
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true,
+                    auth: {
+                        user: 'inspections.emm@gmail.com',
+                        pass: 'Inspect@2019'
+                    }
+                });
+                let mailOptions = {
+                    from: '"EMM Inspections" <inspections.emm@gmail.com>',
+                    to: req.body.Email, 
+                    subject: 'Reset Password',
+                    html: '<b>Follow the link to reset</b>'
+                };
+          
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                        res.status(400).send({"User": "Email failed to send"});
+                    }
+                    console.log('Message %s sent: %s', info.messageId, info.response);
+                    res.status(200).send({"User":"Please check your email for instructions to change password"});
+                    });
+            }
+        }); 
     } catch (err) {
         throw boom.boomify(err);
     }

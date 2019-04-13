@@ -1,0 +1,29 @@
+{
+  "name": "emm_v2_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Voiceless-Words/EMM_V2_backend.git"
+  },
+  "author": "Minggle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Voiceless-Words/EMM_V2_backend/issues"
+  },
+  "homepage": "https://github.com/Voiceless-Words/EMM_V2_backend#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "boom": "^7.3.0",
+    "dotenv": "^7.0.0",
+    "fastify": "^2.1.0",
+    "fastify-swagger": "^2.3.2",
+    "mongoose": "^5.4.21",
+    "nodemailer": "^6.1.0",
+    "nodemon": "^1.18.10"
+  }
+}
